@@ -31,4 +31,25 @@ def find_singels(sodoku):
             miss = 0
     return
 
-    
+def hidden_singels(sodoku): # EJ LÄNGRE AKTIV!
+    # Går igenom region en siffra i taget och kollar om det finns någon kandidat
+    # som bara kan vara i en specifik cell.
+    #miss = 0
+    n = 0
+    #while miss < 81: # while satsen måste fixas så den går igenom hela spelplanen ordentligt!
+    for j in range(9):
+        for a in range(1, 10):
+            I = []
+            for i in range(9):
+                if sodoku[i][j][0] == " ":
+                    n = n + sodoku[i][j].count(a)
+                    if n == 1:
+                        I.append(i)
+            if n == 1:
+                sodoku[I[0]][j] = [a]
+                sodoku_list.uppdate_list(sodoku, I[0], j)
+                    #miss = 0
+                del I
+            n = 0
+     #   miss = miss + 1
+    return
