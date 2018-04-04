@@ -3,26 +3,15 @@
 # Hårdkodad Sodoku att testa med. Går att göra egen med funktionen setup fast
 # det är ganska jobbigt. Vill göra en smidigare inmatning där man skriver in
 # allt på en gång.
-sodoku1 = [[[5],[" "],[7],[" "],[9],[3],[4],[1],[" "]],
-          [[" "],[2],[" "],[" "],[7],[" "],[" "],[3],[" "]],
-          [[9],[3],[" "],[2],[5],[" "],[8],[" "],[" "]],
-          [[" "],[" "],[6],[" "],[" "],[" "],[1],[" "],[" "]],
-          [[" "],[" "],[9],[4],[" "],[1],[7],[" "],[" "]],
-          [[" "],[" "],[2],[" "],[" "],[" "],[3],[" "],[" "]],
-          [[" "],[" "],[5],[" "],[4],[2],[" "],[7],[1]],
-          [[" "],[7],[" "],[" "],[1],[" "],[" "],[5],[" "]],
-          [[" "],[9],[3],[5],[6],[" "],[2],[" "],[4]]]
-
-sodoku2 = [[[" "],[" "],[1],[" "],[" "],[" "],[" "],[" "],[8]],
-          [[2],[" "],[" "],[4],[" "],[" "],[" "],[" "],[6]],
-          [[" "],[" "],[" "],[" "],[9],[" "],[" "],[5],[" "]],
-          [[" "],[5],[" "],[" "],[" "],[7],[" "],[3],[" "]],
-          [[" "],[" "],[8],[" "],[" "],[" "],[2],[" "],[" "]],
-          [[" "],[4],[" "],[6],[" "],[" "],[" "],[9],[" "]],
-          [[" "],[7],[" "],[" "],[1],[" "],[" "],[" "],[" "]],
-          [[6],[" "],[" "],[" "],[" "],[3],[" "],[" "],[4]],
-          [[4],[" "],[" "],[" "],[" "],[" "],[5],[" "],[" "]]]
-
+sodoku25 = [[[" "],[" "],[" "],[3],[" "],[" "],[" "],[" "],[" "]],
+          [[" "],[" "],[" "],[" "],[" "],[" "],[9],[8],[" "]],
+          [[" "],[" "],[2],[1],[4],[" "],[" "],[" "],[" "]],
+          [[" "],[" "],[" "],[" "],[" "],[" "],[" "],[1],[4]],
+          [[" "],[9],[" "],[" "],[" "],[" "],[" "],[3],[" "]],
+          [[6],[8],[" "],[" "],[" "],[" "],[" "],[" "],[" "]],
+          [[" "],[" "],[" "],[" "],[9],[8],[6],[" "],[" "]],
+          [[" "],[2],[1],[" "],[" "],[" "],[" "],[" "],[" "]],
+          [[" "],[" "],[" "],[" "],[" "],[5],[" "],[" "],[" "]]]
 # Delade upp koden i moduler när den började bli stor.
 # Ska kanske lägga till en module för vanligare funktioner som
 # write_number() i slice_n_dice.py utifall jag behöver den i
@@ -51,27 +40,28 @@ def setup(sodoku):
 # TESTS
 
 print("Input:")
-print_sodoku.print_sodoku(sodoku2)
-sodoku_list.make_list(sodoku2)
-empty = slice_n_dice.find_singles(sodoku2)
-empty = slice_n_dice.hidden_singles(sodoku2)
+print_sodoku.print_sodoku(sodoku25)
+sodoku_list.make_list(sodoku25)
+empty = slice_n_dice.find_singles(sodoku25)
+empty = slice_n_dice.hidden_singles(sodoku25)
+print("Entering for-loop.")
+for i in range(11):
+    empty = slice_n_dice.find_singles(sodoku25)
+    empty = slice_n_dice.hidden_singles(sodoku25)
 
-for i in range(10):
-    list = bounded_pairs.find_pair(sodoku2)
+    list = bounded_pairs.find_pair(sodoku25)
     #print(list[0])
     #print(list[1])
 
     koord = bounded_pairs.bounded_pair(list)
+    
     #print(koord)
     for k in range(len(koord)):
         if k % 2 == 0:
-            sodoku_list.update_list_pair(sodoku2, koord[k], koord[k + 1])
+            sodoku_list.update_list_pair(sodoku25, koord[k], koord[k + 1])
    
-    empty = slice_n_dice.find_singles(sodoku2)
-    empty = slice_n_dice.hidden_singles(sodoku2)
-
 
 print("Output:")
-print_sodoku.print_sodoku(sodoku2)
+print_sodoku.print_sodoku(sodoku25)
 
 
