@@ -48,19 +48,43 @@ def setup(sodoku):
 
 # TESTS
 
-#print("Input:")
-#print_sodoku.print_sodoku(sodoku2)
+print("Input:")
+print_sodoku.print_sodoku(sodoku2)
 sodoku_list.make_list(sodoku2)
 #print(sodoku[0][0])
-slice_n_dice.find_singels(sodoku2)
-#hidden_singels(sodoku2)
-list = bounded_pairs.find_pair(sodoku2)
-print(list)
-list1 = bounded_pairs.bounded_pair_box(list)
-print(list1)
+empty = slice_n_dice.find_singels(sodoku2)
+#print("list at 4,8:", sodoku2[4][8])
+#print("lsit at 3,6:", sodoku2[3][6])
+#print("list at 5,6:", sodoku2[5][6])
+#
+#print("list at 4,8:", sodoku2[4][8])
+#print("lsit at 3,6:", sodoku2[3][6])
+#print("list at 5,6:", sodoku2[5][6])
+#empty = slice_n_dice.find_singels(sodoku2)
+#print("lsit at 3,6:", sodoku2[3][6])
+empty = slice_n_dice.hidden_singels(sodoku2)
 
-#print("Output:")
-#print_sodoku.print_sodoku(sodoku2)
+for i in range(5):
+    list = bounded_pairs.find_pair(sodoku2)
+    print(list[0])
+    print(list[1])
+#print(list)
+#list1 = bounded_pairs.bounded_pair_box(list)
+#print(list1)
+#list2 = bounded_pairs.compare_pair(list1)
+#print(list2)
+#list3 = bounded_pairs.compare_pair(list[1])
+    koord = bounded_pairs.bounded_pair(list)
+    print(koord)
+    for k in range(len(koord)):
+        if k % 2 == 0:
+            sodoku_list.uppdate_list_pair(sodoku2, koord[k], koord[k + 1])
+   # 
+    empty = slice_n_dice.find_singels(sodoku2)
+
+#print(list3)
+print("Output:")
+print_sodoku.print_sodoku(sodoku2)
 #print(sodoku[0][0])
 
 #setup(sodoku)    
@@ -72,4 +96,3 @@ print(list1)
 #uppdate_list(sodoku, 3, 8)
 #print(sodoku[3][0])
 #print(search_box(sodoku, 4, 7, 1))
-
