@@ -4,14 +4,11 @@ def find_pair(sodoku):
     # Kollar vilka celler som har listor med två element + " ".
     # Returnerar lista med koordinater.
     pair_koord = [[],[]]
-    k = 0
     for i in range(9):
         for j in range(9):
             if len(sodoku[i][j]) == 3:
                 pair_koord[0].append([i,j])
                 pair_koord[1].append(sodoku[i][j])
-                #pair_koord[1][k].remove(" ")
-                k = k + 1
     return pair_koord
 
 def bounded_pair_box(pair_koord): # ANDVÄNDS EJ I NULÄGET!

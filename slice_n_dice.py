@@ -9,11 +9,11 @@ def write_number(sodoku, i, j):
     
     if (len(sodoku[i][j]) == 2) and (sodoku[i][j][0] == " "):
         del sodoku[i][j][0]
-        print("Writhing", sodoku[i][j][0], "at", i, j)
+        print("Writhing", sodoku[i][j][0], "at sodoku[", i, "][", j, "]")
         return True
     return False
 
-def find_singels(sodoku):
+def find_singles(sodoku):
     # Går igenom varje cell i sodokut och letar efter listor som bara har en kandidat.
     
     i = 0
@@ -31,13 +31,13 @@ def find_singels(sodoku):
                 i = 0
                 j = (j + 1) % 9
         else:
-            sodoku_list.uppdate_list(sodoku, i, j)
+            sodoku_list.update_list(sodoku, i, j)
             miss = 0
             empty = empty - 1
             print("Remaining empty cells:", empty)
     return empty
 
-def hidden_singels(sodoku): 
+def hidden_singles(sodoku): 
     # Går igenom region en siffra i taget och kollar om det finns någon kandidat
     # som bara kan vara i en specifik cell.
     miss = 0
@@ -49,11 +49,11 @@ def hidden_singels(sodoku):
         # har haft problem med if-satsen: den har skrivit över en icke tom cell!
         # kolla om det går att ha radbrytning i if-satsen så raden inte är 156
         # karaktärer lång!
-        if ((search_sodoku.search_row_hidden(sodoku, i, a) == 1) or (search_sodoku.search_kol_hidden(sodoku, j, a) == 1)) and (sodoku[i][j].count(a) == 1):# and (sodoku[i][j][0] == " "):
-            #print(i,j,a,sodoku[i][j])
+        if ((search_sodoku.search_row_hidden(sodoku, i, a) == 1) or
+            (search_sodoku.search_kol_hidden(sodoku, j, a) == 1)) and (sodoku[i][j].count(a) == 1):# and (sodoku[i][j][0] == " "):
             sodoku[i][j] = [a]
-            print("Writhing hidden", sodoku[i][j][0], "at", i, j)
-            sodoku_list.uppdate_list(sodoku, i, j)
+            print("Writhing hidden", sodoku[i][j][0], "at sodoku[", i, "][", j, "]")
+            sodoku_list.update_list(sodoku, i, j)
             empty = empty - 1
             miss = 0
             i = i + 1

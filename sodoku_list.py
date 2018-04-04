@@ -22,24 +22,27 @@ def make_list(sodoku):
                     insert_number(sodoku, a, i + 1, j + 1)
     return
 
-def uppdate_list(sodoku, i, j):
+def update_list(sodoku, i, j):
     # Kolla de "fält" som påvärkats av inskriven siffra och tar bort kandidater
     # ur de listorna.
     a = sodoku[i][j][0]
-    print("Uppdating list, singel.")# Koordinate:", i, j, "Value:", a)
+    print("Updating list, singel.")# Koordinate:", i, j, "Value:", a)
     for k in range(9):
         if k != i and sodoku[k][j].count(a) != 0:
+            print("Exicuting: sodoku[", k, "][", j, "].remove(", a, ")")
             sodoku[k][j].remove(a)
         if k != j and sodoku[i][k].count(a) != 0:
+            print("Exicuting: sodoku[", i, "][", k, "].remove(", a, ")")
             sodoku[i][k].remove(a)
     for k in range(i - i % 3, i - i % 3 + 3):
         for l in range(j - j % 3, j - j % 3 + 3):
             if (k != i or l != j) and sodoku[k][l].count(a) != 0:
                 # or för att vi redan sökt k = i, l = j ovan.
+                print("Exicuting: sodoku[", k, "][", l, "].remove(", a, ") box")
                 sodoku[k][l].remove(a)
     return
 
-def uppdate_list_pair(sodoku, koord_pair1, koord_pair2):
+def update_list_pair(sodoku, koord_pair1, koord_pair2):
     # Kollar vilka regioner som koordinaterna har gemensamt och tar bort siffrorna
     # från de listor som ligger i dessa regioner.
     i = koord_pair1[0]
@@ -47,29 +50,38 @@ def uppdate_list_pair(sodoku, koord_pair1, koord_pair2):
     I = koord_pair2[0]
     J = koord_pair2[1]
     a = sodoku[i][j][1]
-    print(i,j,a,sodoku[i][j])
     b = sodoku[i][j][2]
     
-    print("Uppdating list, pair.")
+    print("Updating list, pair.")
     for k in range(9):
         if k != i and j == J and sodoku[k][j].count(a) != 0:
+            print("Exicuting: sodoku[", k, "][", j, "].remove(", a, ")")
             sodoku[k][j].remove(a)
         if k != i and j == J and sodoku[k][j].count(b) != 0:
+            print("Exicuting: sodoku[", k, "][", j, "].remove(", b, ")")
             sodoku[k][j].remove(b)
         if k != j and i == I and sodoku[i][k].count(a) != 0:
+            print("Exicuting: sodoku[", i, "][", k, "].remove(", a, ")")
             sodoku[i][k].remove(a)
         if k != j and i == I and sodoku[i][k].count(b) != 0:
+            print("Exicuting: sodoku[", i, "][", k, "].remove(", b, ")")
             sodoku[i][k].remove(b)
     for k in range(i - i % 3, i - i % 3 + 3):
         for l in range(j - j % 3, j - j % 3 + 3):
-            if (k != i or l != j) and sodoku[k][l].count(a) != 0:
+            if (k != i or l != j) and sodoku[k][l].count(a) != 0 and (i - i % 3 == I - I % 3) and (j - j % 3 == J - J % 3):
                 # or för att vi redan sökt k = i, l = j ovan.
+                print("Exicuting: sodoku[", k, "][", l, "].remove(", a, ") box")
                 sodoku[k][l].remove(a)
-            if (k != i or l != j) and sodoku[k][l].count(b) != 0:
+            if (k != i or l != j) and sodoku[k][l].count(b) != 0 and (i - i % 3 == I - I % 3) and (j - j % 3 == J - J % 3):
                 # or för att vi redan sökt k = i, l = j ovan.
+                print("Exicuting: sodoku[", k, "][", l, "].remove(", b, ") box")
                 sodoku[k][l].remove(b)            
-    
+    print("Exicuting: sodoku[", I, "][", J, "].append(", a, ")")
+    print("Exicuting: sodoku[", I, "][", J, "].append(", b, ")")
     sodoku[I][J].append(a)
     sodoku[I][J].append(b)
-    
+    # Dessa två append skriver till a och b trots att vi inte tagit bort som tidigare
+    # om det visar sig vara avlägsna bundna par! måste fixas om det inte hanteras av
+    # senare algoritmer!
     return
+
