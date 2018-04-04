@@ -11,14 +11,6 @@ def find_pair(sodoku):
                 pair_koord[1].append(sodoku[i][j])
     return pair_koord
 
-def bounded_pair_box(pair_koord): # ANDVÄNDS EJ I NULÄGET!
-    # Kollar vilka par som ligger i samma box.
-    check = []
-    for k in range(len(pair_koord[0])):
-        check.append([pair_koord[0][k][0] - pair_koord[0][k][0] % 3,
-                      pair_koord[0][k][1] - pair_koord[0][k][1] % 3])
-    return check
-
 def compare_pair(list):
     # Kollar om paren i list upprepas och när.
     pair = []
