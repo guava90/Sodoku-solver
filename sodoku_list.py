@@ -69,3 +69,33 @@ def update_list_pair(sodoku, koord_pair1, koord_pair2):
         
     return
 
+def update_list_triples(sodoku, koord1, koord2, koord3, kand):
+    # Kollar vilka regioner som koordinaterna har gemensamt och tar bort siffrorna
+    # från de listor som ligger i dessa regioner.
+    i1 = koord1[0]
+    j1 = koord1[1]
+    i2 = koord2[0]
+    j2 = koord2[1]
+    i3 = koord3[0]
+    j3 = koord3[1]
+    a = kand[0]
+    b = kand[1]
+    c = kand[2]
+    
+    print("Updating list, triples. Koordinates: (", i1, ",", j1,
+          "), (", i2, ",", j2, "), (", i3, ",", j3, ")")
+    
+    if i1 == i2 == i3:
+        print("Koordinates share a row.")
+        bounded_triples.remove_triples_row(sodoku, a, i1, j1, b, i2, j2, c, i3, j3)
+        
+    if j1 == j2 == j3:
+        print("Koordinates share a kolumn.")
+        bounded_triples.remove_triples_kol(sodoku, a, i1, j1, b, i2, j2, c, i3, j3)
+        
+    if (i1 - i1 % 3 == i2 - i2 % 3 == i3 - i3 % 3) and (j1 - j1 % 3 == j2 - j2 % 3 == j3 - j3 % 3):
+        print("Koordinates share a box.")
+        bounded_triples.remove_triples_box(sodoku, a, i1, j1, b, i2, j2, c, i3, j3)
+        
+    return
+
