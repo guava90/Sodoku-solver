@@ -16,23 +16,38 @@ def kand_triples(sodoku):
                 kand[1].append(sodoku[i][j])
     return kand
 
-def find_triples(sodoku, kand):
+
+def find_triples_row(sodoku, kand_koord, kand_value):
     # Söker igenom sodoku efter koordinater till de celler där åtminstånde två av
     # kandidaterna finns. Dessa celler har listor med två eller tre kandidater.
-    # In variabeln "kand" måste vara en enkel lista så for-loopen ska funka!
+    # In variabeln "kand" ska vara en lista där kand[0] innehåller koordinater och
+    # kand[1] innehåller kandidaterna.
     n = 0
     koord = []
-    for i in range(9):
-        for j in range(9):
-            for k in kand[1:3]:
-                #print(i, j, k, sodoku[i][j].count(k))
-                n = n + sodoku[i][j].count(k)
-
+    i = kand_koord[0]
+    for j in range(9):
+        for k in kand_value[1:5]:
+            #print(i, j, k, sodoku[i][j].count(k))
+            n = n + sodoku[i][j].count(k)
             if (n == 2 and len(sodoku[i][j]) == 3) or (n == 3 and len(sodoku[i][j]) == 4) :
                 koord.append([i,j])
-                print(n)
                 n = 0
+        n = 0
+    return koord
 
+def find_triples_kol(sodoku, kand_koord, kand_value):
+    #
+    n = 0
+    koord = []
+    j = kand_koord[1]
+    for i in range(9):
+        for k in kand_value[1:5]:
+            #print(i, j, k, sodoku[i][j].count(k))
+            n = n + sodoku[i][j].count(k)
+            if (n == 2 and len(sodoku[i][j]) == 3) or (n == 3 and len(sodoku[i][j]) == 4) :
+                koord.append([i,j])
+                n = 0
+        n = 0
     return koord
 
 def remove_triples_kol(sodoku, a, i1, j1, b, i2, j2, c, i3, j3):
@@ -42,18 +57,12 @@ def remove_triples_kol(sodoku, a, i1, j1, b, i2, j2, c, i3, j3):
         if k!= i1 and k != i2 and k != i3 and sodoku[k][j1].count(a) != 0:
             print("Exicuting: sodoku[", k, "][", j1, "].remove(", a, ")")
             sodoku[k][j1].remove(a)
-        else:
-            print("Could not remove", a, "from kolumn", j1)
-        if k!= i1 and k != i2 and k != i3 and sodoku[k][j1].count(a) != 0:
+        if k!= i1 and k != i2 and k != i3 and sodoku[k][j1].count(b) != 0:
             print("Exicuting: sodoku[", k, "][", j1, "].remove(", b, ")")
             sodoku[k][j1].remove(b)
-        else:
-            print("Could not remove", b, "from kolumn", j1)
-        if k!= i1 and k != i2 and k != i3 and sodoku[k][j1].count(a) != 0:
+        if k!= i1 and k != i2 and k != i3 and sodoku[k][j1].count(c) != 0:
             print("Exicuting: sodoku[", k, "][", j1, "].remove(", c, ")")
             sodoku[k][j1].remove(c)
-        else:
-            print("Could not remove", c, "from kolumn", j1)
     return
 
 def remove_triples_row(sodoku, a, i1, j1, b, i2, j2, c, i3, j3):
@@ -61,13 +70,13 @@ def remove_triples_row(sodoku, a, i1, j1, b, i2, j2, c, i3, j3):
         # kan bli fel med if-satsen. Isåfall lägg till append() i en till
         # if-sats!
         if k!= j1 and k != j2 and k != j3 and sodoku[i1][k].count(a) != 0:
-            print("Exicuting: sodoku[", k, "][", j1, "].remove(", a, ")")
+            print("Exicuting: sodoku[", i1, "][", k, "].remove(", a, ")")
             sodoku[i1][k].remove(a)
         if k!= j1 and k != j2 and k != j3 and sodoku[i1][k].count(b) != 0:
-            print("Exicuting: sodoku[", k, "][", j1, "].remove(", b, ")")
+            print("Exicuting: sodoku[", i1, "][", k, "].remove(", b, ")")
             sodoku[i1][k].remove(b)
         if k!= j1 and k != j2 and k != j3 and sodoku[i1][k].count(c) != 0:
-            print("Exicuting: sodoku[", k, "][", j1, "].remove(", c, ")")
+            print("Exicuting: sodoku[", i1, "][", k, "].remove(", c, ")")
             sodoku[i1][k].remove(c)
     return
 
