@@ -44,7 +44,7 @@ def find_triples_row(sodoku, kand_koord, kand_value):
     else:
         print("No triples found.")
         return []
-    
+
 def find_triples_kol(sodoku, kand_koord, kand_value):
     #
     n = 0
@@ -59,6 +59,7 @@ def find_triples_kol(sodoku, kand_koord, kand_value):
                 koord.append([i,j])
                 n = 0
     if len(koord) == 3:
+        #print("Triples found at (",i ,",", j, ") \n kand:", kand_value)
         return koord
     else:
         print("No triples found.")
@@ -117,7 +118,7 @@ def remove_triples_box(sodoku, a, i1, j1, b, i2, j2, c, i3, j3):
     return
 
 
-        
+
 sodoku25 = [[[" "],[" "],[" "],[ 3 ],[" "],[" "],[" "],[" "],[" "]],
             [[" "],[" "],[" "],[" "],[" "],[" "],[ 9 ],[ 8 ],[" "]],
             [[" "],[" "],[ 2 ],[ 1 ],[ 4 ],[" "],[" "],[" "],[" "]],
@@ -137,7 +138,7 @@ sodoku_list.make_list(sodoku25)
 empty = slice_n_dice.find_singles(sodoku25)
 empty = slice_n_dice.hidden_singles(sodoku25)
 print("Entering for-loop.")
-for i in range(10):
+for i in range(5):
     if empty == 0:
         # När koden är klar ska for-loopen bli en while-loop och då ska den
         # terminera när empty = 0 (dvs while empty > 0:)
@@ -150,34 +151,36 @@ for i in range(10):
 ##        break
     else:
         print(100 * (1 - empty / 81), "% done.")
-        
+
     while empty < empty_old:
         empty_old = empty
         empty = slice_n_dice.find_singles(sodoku25)
         empty = slice_n_dice.hidden_singles(sodoku25)
-    
+
     list = bounded_pairs.find_pair(sodoku25)
     #print(list[0])
     #print(list[1])
 
     koord = bounded_pairs.bounded_pair(list)
-    
+
     #print(koord)
     for k in range(len(koord)):
         if k % 2 == 0:
             sodoku_list.update_list_pair(sodoku25, koord[k], koord[k + 1])
-            
+
     triples = kand_triples(sodoku25)
     for k in range(len(triples[1])):
         # koord skrivs över nu!
         koord = find_triples_kol(sodoku25, triples[0][k], triples[1][k])
-        
+        if len(koord) == 3:
+            sodoku_list.update_list_triples(sodoku25, koord[0], koord[1], koord[2], triples[1][k])
+
+
+
     #print(triples)
     empty = slice_n_dice.find_singles(sodoku25)
     empty = slice_n_dice.hidden_singles(sodoku25)
-    
-    
+
+
 print("Output:")
 print_sodoku.print_sodoku(sodoku25)
-
-
