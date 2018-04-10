@@ -88,7 +88,7 @@ def update_list_triples(sodoku, koord1, koord2, koord3, kand):
           "), (", i2, ",", j2, "), (", i3, ",", j3, ") \n Kand:", a, b, c)
 
     if i1 == i2 == i3:
-        print("Koordinates share a row.")
+        print("Koordinates share a row.", i1)
         bounded_triples.remove_triples_row(sodoku, a, i1, j1, b, i2, j2, c, i3, j3)
 
     if j1 == j2 == j3:
@@ -96,7 +96,8 @@ def update_list_triples(sodoku, koord1, koord2, koord3, kand):
         bounded_triples.remove_triples_kol(sodoku, a, i1, j1, b, i2, j2, c, i3, j3)
 
     if (i1 - i1 % 3 == i2 - i2 % 3 == i3 - i3 % 3) and (j1 - j1 % 3 == j2 - j2 % 3 == j3 - j3 % 3):
-        print("Koordinates share a box.")
+        print("Koordinates share a box.", i1 - i1 % 3, j1 - j1 % 3)
         bounded_triples.remove_triples_box(sodoku, a, i1, j1, b, i2, j2, c, i3, j3)
 
     return
+
