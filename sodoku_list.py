@@ -1,6 +1,8 @@
 # Sodoku list module
 import search_sodoku
 import bounded_pairs
+import bounded_triples
+#from SodokuSolver import remove_triples_kol
 
 def insert_number(sodoku, a, x, y):
     # Lägger till siffran "a" i listan bakom de tomma cellerna.
@@ -52,21 +54,21 @@ def update_list_pair(sodoku, koord_pair1, koord_pair2):
     J = koord_pair2[1]
     a = sodoku[i][j][1]
     b = sodoku[i][j][2]
-    
+
     print("Updating list, pair. Koordinates: (", i, ",", j, "), (", I, ",", J, ")")
 
     if i == I:
         print("koordinates share a row.")
         bounded_pairs.remove_pair_row(sodoku, a, i, j, b, I, J)
-        
+
     if j == J:
         print("Koordinates share kolumn.")
         bounded_pairs.remove_pair_kol(sodoku, a, i, j, b, I, J)
-        
+
     if (i - i % 3 == I - I % 3) and (j - j % 3 == J - J % 3):
         print("Koordinates share a box.")
         bounded_pairs.remove_pair_box(sodoku, a, i, j, b, I, J)
-        
+
     return
 
 def update_list_triples(sodoku, koord1, koord2, koord3, kand):
@@ -78,24 +80,23 @@ def update_list_triples(sodoku, koord1, koord2, koord3, kand):
     j2 = koord2[1]
     i3 = koord3[0]
     j3 = koord3[1]
-    a = kand[0]
-    b = kand[1]
-    c = kand[2]
-    
+    a = kand[1]
+    b = kand[2]
+    c = kand[3]
+
     print("Updating list, triples. Koordinates: (", i1, ",", j1,
-          "), (", i2, ",", j2, "), (", i3, ",", j3, ")")
-    
+          "), (", i2, ",", j2, "), (", i3, ",", j3, ") \n Kand:", a, b, c)
+
     if i1 == i2 == i3:
         print("Koordinates share a row.")
         bounded_triples.remove_triples_row(sodoku, a, i1, j1, b, i2, j2, c, i3, j3)
-        
+
     if j1 == j2 == j3:
-        print("Koordinates share a kolumn.")
+        print("Koordinates share a kolumn.", j1)
         bounded_triples.remove_triples_kol(sodoku, a, i1, j1, b, i2, j2, c, i3, j3)
-        
+
     if (i1 - i1 % 3 == i2 - i2 % 3 == i3 - i3 % 3) and (j1 - j1 % 3 == j2 - j2 % 3 == j3 - j3 % 3):
         print("Koordinates share a box.")
         bounded_triples.remove_triples_box(sodoku, a, i1, j1, b, i2, j2, c, i3, j3)
-        
-    return
 
+    return
