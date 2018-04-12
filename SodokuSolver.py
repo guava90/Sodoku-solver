@@ -10,6 +10,8 @@ import slice_n_dice
 import bounded_pairs
 import bounded_triples
 import search_sodoku
+import x_wing
+
 
 ##def chain(list):
 ##    koord_chain = [list[0][0]]
@@ -19,14 +21,13 @@ import search_sodoku
 ##        if list[0][k][0] == i and (list[1][k][1] == or list[1][k][1] == ):
 ##            koord_chain.append(list[0][k])
 ##            break
-##    
-    
-    
-            
-            
-    
+##
+
+
+
+
 def solve_sodoku(sodoku):
-    
+
     empty_old = search_sodoku.search_empty(sodoku)
     sodoku_list.make_list(sodoku)
     empty = slice_n_dice.find_singles(sodoku)
@@ -51,7 +52,7 @@ def solve_sodoku(sodoku):
 ##            solve_sodoku(new_sodoku)
 ##            print("Output:")
 ##            print_sodoku.print_sodoku(sodoku)
-            #return sodoku   
+            #return sodoku
         else:
             print(100 * (1 - empty / 81), "% done.")
 
@@ -79,24 +80,25 @@ def solve_sodoku(sodoku):
             if len(koord) == 3:
                 sodoku_list.update_list_triples(sodoku, koord[0], koord[1], koord[2], triples[1][k])
 
-
+        x_wing.x_wing_row(sodoku)
+        x_wing.x_wing_kol(sodoku)
     #print(triples)
         empty = slice_n_dice.find_singles(sodoku)
         empty = slice_n_dice.hidden_singles(sodoku)
 
-    return sodoku
-    
-    
 
-sodoku25 = [[[" "],[" "],[" "],[ 3 ],[" "],[" "],[" "],[" "],[" "]],
-            [[" "],[" "],[" "],[" "],[" "],[" "],[ 9 ],[ 8 ],[" "]],
-            [[" "],[" "],[ 2 ],[ 1 ],[ 4 ],[" "],[" "],[" "],[" "]],
-            [[" "],[" "],[" "],[" "],[" "],[" "],[" "],[ 1 ],[ 4 ]],
-            [[" "],[ 9 ],[" "],[" "],[" "],[" "],[" "],[ 3 ],[" "]],
-            [[ 6 ],[ 8 ],[" "],[" "],[" "],[" "],[" "],[" "],[" "]],
-            [[" "],[" "],[" "],[" "],[ 9 ],[ 8 ],[ 6 ],[" "],[" "]],
-            [[" "],[ 2 ],[ 1 ],[" "],[" "],[" "],[" "],[" "],[" "]],
-            [[" "],[" "],[" "],[" "],[" "],[ 5 ],[" "],[" "],[" "]]]
+
+    return sodoku
+
+sodoku25 = [[[" "],[" "],[" "],[3],[" "],[" "],[" "],[" "],[" "]],
+          [[" "],[" "],[" "],[" "],[" "],[" "],[9],[8],[" "]],
+          [[" "],[" "],[2],[1],[4],[" "],[" "],[" "],[" "]],
+          [[" "],[" "],[" "],[" "],[" "],[" "],[" "],[1],[4]],
+          [[" "],[9],[" "],[" "],[" "],[" "],[" "],[3],[" "]],
+          [[6],[8],[" "],[" "],[" "],[" "],[" "],[" "],[" "]],
+          [[" "],[" "],[" "],[" "],[9],[8],[6],[" "],[" "]],
+          [[" "],[2],[1],[" "],[" "],[" "],[" "],[" "],[" "]],
+          [[" "],[" "],[" "],[" "],[" "],[5],[" "],[" "],[" "]]]
 
 # TESTS
 
