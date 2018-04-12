@@ -41,7 +41,7 @@ def find_triples_kol(sodoku, kand_koord, kand_value):
     koord = []
     j = kand_koord[1]
     for i in range(9):
-        for k in kand_value[1:5]:
+        for k in kand_value[1:]:
             #print(i, j, k, sodoku[i][j].count(k))
             n = n + sodoku[i][j].count(k)
             if (n == 2 and len(sodoku[i][j]) == 3) or (n == 3 and len(sodoku[i][j]) == 4) :
@@ -85,17 +85,17 @@ def remove_triples_box(sodoku, a, i1, j1, b, i2, j2, c, i3, j3):
         for l in range(j1 - j1 % 3, j1 - j1 % 3 + 3):
             # kan bli fel med if-satsen. Isåfall lägg till append() i en till
             # if-sats!
-            if (k != i1 or k != i2 or k != i3 or l != j1 or l != j2 or
+            if (k != i1 and k != i2 and k != i3 and l != j1 and l != j2 and
                 l != j3) and sodoku[k][l].count(a) != 0:
                 # or för att vi redan sökt k = i, l = j ovan.
                 print("Exicuting: sodoku[", k, "][", l, "].remove(", a, ") box")
                 sodoku[k][l].remove(a)
-            if (k != i1 or k != i2 or k != i3 or l != j1 or l != j2 or
+            if (k != i1 and k != i2 and k != i3 and l != j1 and l != j2 and
                 l != j3) and sodoku[k][l].count(b) != 0:
                 # or för att vi redan sökt k = i, l = j ovan.
                 print("Exicuting: sodoku[", k, "][", l, "].remove(", b, ") box")
                 sodoku[k][l].remove(b)
-            if (k != i1 or k != i2 or k != i3 or l != j1 or l != j2 or
+            if (k != i1 and k != i2 and k != i3 and l != j1 and l != j2 and
                 l != j3) and sodoku[k][l].count(c) != 0:
                 # or för att vi redan sökt k = i, l = j ovan.
                 print("Exicuting: sodoku[", k, "][", l, "].remove(", c, ") box")
