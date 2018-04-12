@@ -11,6 +11,82 @@ import bounded_pairs
 import bounded_triples
 import search_sodoku
 
+##def chain(list):
+##    koord_chain = [list[0][0]]
+##    #list[0].remove(koord_chain[0])
+##    i = koord_chain[0][0]
+##    for k in renge(len(list[0])):
+##        if list[0][k][0] == i and (list[1][k][1] == or list[1][k][1] == ):
+##            koord_chain.append(list[0][k])
+##            break
+##    
+    
+    
+            
+            
+    
+def solve_sodoku(sodoku):
+    
+    empty_old = search_sodoku.search_empty(sodoku)
+    sodoku_list.make_list(sodoku)
+    empty = slice_n_dice.find_singles(sodoku)
+    empty = slice_n_dice.hidden_singles(sodoku)
+    print("Entering for-loop.")
+    #while empty > 0:
+    for n in range(5):
+        if empty == 0:
+            break
+        #if empty == empty_old:
+             #solve_sodoku(sodoku)
+##        print("No advancement, terminated.")
+            #print(100 * (1 - empty / 81), "% done.")
+##        break
+##            list = bounded_pairs.find_pair(sodoku)
+##            new_sodoku = sodoku
+##            i = list[0][0][0]
+##            j = list[0][0][1]
+##            a = list[1][0][1]
+##            new_sodoku[i][j] = [a]
+##            sodoku_list.update_list(new_sodoku, i, j)
+##            solve_sodoku(new_sodoku)
+##            print("Output:")
+##            print_sodoku.print_sodoku(sodoku)
+            #return sodoku   
+        else:
+            print(100 * (1 - empty / 81), "% done.")
+
+        while empty < empty_old:
+            empty_old = empty
+            empty = slice_n_dice.find_singles(sodoku)
+            empty = slice_n_dice.hidden_singles(sodoku)
+
+        list = bounded_pairs.find_pair(sodoku)
+
+
+        koord = bounded_pairs.bounded_pair(list)
+
+        for k in range(len(koord)):
+            if k % 2 == 0:
+                sodoku_list.update_list_pair(sodoku, koord[k], koord[k + 1])
+
+        triples = bounded_triples.kand_triples(sodoku)
+        for k in range(len(triples[1])):
+        # koord skrivs över nu!
+            koord = bounded_triples.find_triples_kol(sodoku, triples[0][k], triples[1][k])
+            if len(koord) == 3:
+                sodoku_list.update_list_triples(sodoku, koord[0], koord[1], koord[2], triples[1][k])
+            koord = bounded_triples.find_triples_row(sodoku, triples[0][k], triples[1][k])
+            if len(koord) == 3:
+                sodoku_list.update_list_triples(sodoku, koord[0], koord[1], koord[2], triples[1][k])
+
+
+    #print(triples)
+        empty = slice_n_dice.find_singles(sodoku)
+        empty = slice_n_dice.hidden_singles(sodoku)
+
+    return sodoku
+    
+    
 
 sodoku25 = [[[" "],[" "],[" "],[ 3 ],[" "],[" "],[" "],[" "],[" "]],
             [[" "],[" "],[" "],[" "],[" "],[" "],[ 9 ],[ 8 ],[" "]],
@@ -26,56 +102,6 @@ sodoku25 = [[[" "],[" "],[" "],[ 3 ],[" "],[" "],[" "],[" "],[" "]],
 
 print("Input:")
 print_sodoku.print_sodoku(sodoku25)
-empty_old = search_sodoku.search_empty(sodoku25)
-sodoku_list.make_list(sodoku25)
-empty = slice_n_dice.find_singles(sodoku25)
-empty = slice_n_dice.hidden_singles(sodoku25)
-print("Entering for-loop.")
-for i in range(5):
-    if empty == 0:
-        # När koden är klar ska for-loopen bli en while-loop och då ska den
-        # terminera när empty = 0 (dvs while empty > 0:)
-        print("Done after", i, "iterations!")
-        break
-##    elif empty == empty_old:
-##        # Här ska koden för triplarna ske.
-##        print("No advancement, terminated.")
-##        print(100 * (1 - empty / 81), "% done.")
-##        break
-    else:
-        print(100 * (1 - empty / 81), "% done.")
-
-    while empty < empty_old:
-        empty_old = empty
-        empty = slice_n_dice.find_singles(sodoku25)
-        empty = slice_n_dice.hidden_singles(sodoku25)
-
-    list = bounded_pairs.find_pair(sodoku25)
-    #print(list[0])
-    #print(list[1])
-
-    koord = bounded_pairs.bounded_pair(list)
-
-    #print(koord)
-    for k in range(len(koord)):
-        if k % 2 == 0:
-            sodoku_list.update_list_pair(sodoku25, koord[k], koord[k + 1])
-
-    triples = kand_triples(sodoku25)
-    for k in range(len(triples[1])):
-        # koord skrivs över nu!
-        koord = bound_triples.find_triples_kol(sodoku25, triples[0][k], triples[1][k])
-        if len(koord) == 3:
-            sodoku_list.update_list_triples(sodoku25, koord[0], koord[1], koord[2], triples[1][k])
-        koord = bound_triples.find_triples_row(sodoku25, triples[0][k], triples[1][k])
-        if len(koord) == 3:
-            sodoku_list.update_list_triples(sodoku25, koord[0], koord[1], koord[2], triples[1][k])
-
-
-    #print(triples)
-    empty = slice_n_dice.find_singles(sodoku25)
-    empty = slice_n_dice.hidden_singles(sodoku25)
-
-
+solve_sodoku(sodoku25)
 print("Output:")
 print_sodoku.print_sodoku(sodoku25)
