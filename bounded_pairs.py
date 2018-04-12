@@ -35,19 +35,18 @@ def remove_pair_box(sodoku, a, i, j, b, I, J):
         for l in range(j - j % 3, j - j % 3 + 3):
             if (k != i or l != j) and sodoku[k][l].count(a) != 0:
                 # or för att vi redan sökt k = i, l = j ovan.
-                print("Exicuting: sodoku[", k, "][", l, "].remove(", a, ") box")
-                sodoku[k][l].remove(a)
-                if k == I and l == J:
-                    print("Exicuting: sodoku[", I, "][", J, "].append(", a, ")")
-                    sodoku[I][J].append(a)
+                if k != I and l != J:
+                    print("Exicuting: sodoku[", k, "][", l, "].remove(", a, ") box")
+                    sodoku[k][l].remove(a)
+                
             if (k != i or l != j) and sodoku[k][l].count(b) != 0:
                 # or för att vi redan sökt k = i, l = j ovan.
-                print("Exicuting: sodoku[", k, "][", l, "].remove(", b, ") box")
-                sodoku[k][l].remove(b)
-                if k == I and l == J:
-                    print("Exicuting: sodoku[", I, "][", J, "].append(", b, ")")
-                    sodoku[I][J].append(b)
+                if k != I and l != J:
+                    print("Exicuting: sodoku[", k, "][", l, "].remove(", b, ") box")
+                    sodoku[k][l].remove(b)
+                    
     return
+
 
 def remove_pair_row(sodoku, a, i, j, b, I, J):
     for k in range(9):
