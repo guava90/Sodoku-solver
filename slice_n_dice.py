@@ -18,7 +18,7 @@ def find_singles(sodoku):
     
     i = 0
     j = 0
-    empty = search_sodoku.search_empty(sodoku)
+    empty = search_sodoku.search(sodoku)
     miss = 0
     # Missar vi 81 ggr i rad finns det inga mer singlar på spelplan.
     while miss < 81:
@@ -44,13 +44,14 @@ def hidden_singles(sodoku):
     i = 0
     j = 0
     a = 1
-    empty = search_sodoku.search_empty(sodoku)
+    empty = search_sodoku.search(sodoku)
     while miss < 729:
         # har haft problem med if-satsen: den har skrivit över en icke tom cell!
         # kolla om det går att ha radbrytning i if-satsen så raden inte är 156
         # karaktärer lång!
         if ((search_sodoku.search_row_hidden(sodoku, i, a) == 1) or
-            (search_sodoku.search_kol_hidden(sodoku, j, a) == 1)) and (sodoku[i][j].count(a) == 1):# and (sodoku[i][j][0] == " "):
+            (search_sodoku.search_kol_hidden(sodoku, j, a) == 1) or
+            (search_sodoku.search_box_hidden(sodoku, i, j, a) == 1)) and (sodoku[i][j].count(a) == 1):# and (sodoku[i][j][0] == " "):
             sodoku[i][j] = [a]
             print("Writhing hidden", sodoku[i][j][0], "at sodoku[", i, "][", j, "]")
             sodoku_list.update_list(sodoku, i, j)
