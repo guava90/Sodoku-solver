@@ -2,6 +2,7 @@
 import search_sodoku
 import bounded_pairs
 import bounded_triples
+import simple_coloring
 #from SodokuSolver import remove_triples_kol
 
 def insert_number(sodoku, a, x, y):
@@ -29,6 +30,7 @@ def update_list(sodoku, i, j):
     # Kolla de "fält" som påvärkats av inskriven siffra och tar bort kandidater
     # ur de listorna.
     a = sodoku[i][j][0]
+        
     print("Updating list, singel.")# Koordinate:", i, j, "Value:", a)
     for k in range(9):
         if k != i and sodoku[k][j].count(a) != 0:
@@ -101,3 +103,10 @@ def update_list_triples(sodoku, koord1, koord2, koord3, kand):
 
     return
 
+def update_list_color(sodoku, a):
+    i, j = simple_coloring.find_O(sodoku)
+    while i < 9:
+        simple_coloring.find_X(sodoku, i, j, a)
+        i, j = simple_coloring.find_O(sodoku)
+    simple_coloring.remove_X(sodoku)
+    return
