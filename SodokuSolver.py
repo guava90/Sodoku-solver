@@ -11,25 +11,14 @@ import bounded_pairs
 import bounded_triples
 import search_sodoku
 import x_wing
-
-
-##def chain(list):
-##    koord_chain = [list[0][0]]
-##    #list[0].remove(koord_chain[0])
-##    i = koord_chain[0][0]
-##    for k in renge(len(list[0])):
-##        if list[0][k][0] == i and (list[1][k][1] == or list[1][k][1] == ):
-##            koord_chain.append(list[0][k])
-##            break
-##
-
-
+import determined_chain
+import simple_coloring
 
 
 def solve_sodoku(sodoku):
 
-    empty_old = search_sodoku.search_empty(sodoku)
-    sodoku_list.make_list(sodoku)
+    empty_old = search_sodoku.search(sodoku)
+    
     empty = slice_n_dice.find_singles(sodoku)
     empty = slice_n_dice.hidden_singles(sodoku)
     print("Entering for-loop.")
@@ -37,22 +26,9 @@ def solve_sodoku(sodoku):
     for n in range(5):
         if empty == 0:
             break
-        #if empty == empty_old:
-             #solve_sodoku(sodoku)
-##        print("No advancement, terminated.")
-            #print(100 * (1 - empty / 81), "% done.")
-##        break
-##            list = bounded_pairs.find_pair(sodoku)
-##            new_sodoku = sodoku
-##            i = list[0][0][0]
-##            j = list[0][0][1]
-##            a = list[1][0][1]
-##            new_sodoku[i][j] = [a]
-##            sodoku_list.update_list(new_sodoku, i, j)
-##            solve_sodoku(new_sodoku)
-##            print("Output:")
-##            print_sodoku.print_sodoku(sodoku)
-            #return sodoku
+##        if empty == empty_old:
+##            Nishio(sodoku)
+                             
         else:
             print(100 * (1 - empty / 81), "% done.")
 
@@ -82,6 +58,9 @@ def solve_sodoku(sodoku):
 
         x_wing.x_wing_row(sodoku)
         x_wing.x_wing_kol(sodoku)
+        determined_chain.determined_rectangle(sodoku)
+        for a in range(1,10):
+            simple_coloring.simple_coloring(sodoku, a)
     #print(triples)
         empty = slice_n_dice.find_singles(sodoku)
         empty = slice_n_dice.hidden_singles(sodoku)
@@ -90,20 +69,22 @@ def solve_sodoku(sodoku):
 
     return sodoku
 
-sodoku25 = [[[" "],[" "],[" "],[3],[" "],[" "],[" "],[" "],[" "]],
-          [[" "],[" "],[" "],[" "],[" "],[" "],[9],[8],[" "]],
-          [[" "],[" "],[2],[1],[4],[" "],[" "],[" "],[" "]],
-          [[" "],[" "],[" "],[" "],[" "],[" "],[" "],[1],[4]],
-          [[" "],[9],[" "],[" "],[" "],[" "],[" "],[3],[" "]],
-          [[6],[8],[" "],[" "],[" "],[" "],[" "],[" "],[" "]],
-          [[" "],[" "],[" "],[" "],[9],[8],[6],[" "],[" "]],
-          [[" "],[2],[1],[" "],[" "],[" "],[" "],[" "],[" "]],
-          [[" "],[" "],[" "],[" "],[" "],[5],[" "],[" "],[" "]]]
+sodoku19 = [[[ 4 ],[" "],[" "],[" "],[ 8 ],[ 6 ],[" "],[" "],[" "]],
+            [[" "],[" "],[" "],[" "],[" "],[ 3 ],[" "],[" "],[" "]],
+            [[" "],[" "],[" "],[" "],[" "],[" "],[" "],[ 9 ],[ 7 ]],
+            [[" "],[ 7 ],[ 9 ],[" "],[" "],[" "],[" "],[" "],[" "]],
+            [[" "],[ 1 ],[" "],[" "],[" "],[" "],[" "],[ 6 ],[" "]],
+            [[" "],[" "],[" "],[" "],[" "],[" "],[ 4 ],[ 3 ],[" "]],
+            [[ 6 ],[ 4 ],[" "],[" "],[" "],[" "],[" "],[" "],[" "]],
+            [[" "],[" "],[" "],[ 7 ],[" "],[" "],[" "],[" "],[" "]],
+            [[" "],[" "],[" "],[ 1 ],[ 2 ],[" "],[" "],[" "],[ 8 ]]]
 
 # TESTS
 
 print("Input:")
-print_sodoku.print_sodoku(sodoku25)
-solve_sodoku(sodoku25)
+print_sodoku.print_sodoku(sodoku19)
+sodoku_list.make_list(sodoku19)
+solve_sodoku(sodoku19)
 print("Output:")
-print_sodoku.print_sodoku(sodoku25)
+print_sodoku.print_sodoku(sodoku19)
+
