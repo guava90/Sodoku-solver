@@ -18,7 +18,7 @@ import simple_coloring
 def solve_sodoku(sodoku):
 
     empty_old = search_sodoku.search(sodoku)
-    
+
     empty = slice_n_dice.find_singles(sodoku)
     empty = slice_n_dice.hidden_singles(sodoku)
     print("Entering for-loop.")
@@ -28,7 +28,7 @@ def solve_sodoku(sodoku):
             break
 ##        if empty == empty_old:
 ##            Nishio(sodoku)
-                             
+
         else:
             print(100 * (1 - empty / 81), "% done.")
 
@@ -59,6 +59,7 @@ def solve_sodoku(sodoku):
         x_wing.x_wing_row(sodoku)
         x_wing.x_wing_kol(sodoku)
         determined_chain.determined_rectangle(sodoku)
+        determined_chain.semi_determined_rectangle(sodoku)
         for a in range(1,10):
             simple_coloring.simple_coloring(sodoku, a)
     #print(triples)
@@ -69,22 +70,21 @@ def solve_sodoku(sodoku):
 
     return sodoku
 
-sodoku19 = [[[ 4 ],[" "],[" "],[" "],[ 8 ],[ 6 ],[" "],[" "],[" "]],
-            [[" "],[" "],[" "],[" "],[" "],[ 3 ],[" "],[" "],[" "]],
-            [[" "],[" "],[" "],[" "],[" "],[" "],[" "],[ 9 ],[ 7 ]],
-            [[" "],[ 7 ],[ 9 ],[" "],[" "],[" "],[" "],[" "],[" "]],
-            [[" "],[ 1 ],[" "],[" "],[" "],[" "],[" "],[ 6 ],[" "]],
-            [[" "],[" "],[" "],[" "],[" "],[" "],[ 4 ],[ 3 ],[" "]],
-            [[ 6 ],[ 4 ],[" "],[" "],[" "],[" "],[" "],[" "],[" "]],
-            [[" "],[" "],[" "],[ 7 ],[" "],[" "],[" "],[" "],[" "]],
-            [[" "],[" "],[" "],[ 1 ],[ 2 ],[" "],[" "],[" "],[ 8 ]]]
+sodoku20 = [[[" "],[" "],[" "],[" "],[ 2 ],[" "],[" "],[" "],[ 5 ]],
+            [[" "],[" "],[ 4 ],[" "],[" "],[" "],[ 7 ],[" "],[" "]],
+            [[" "],[ 9 ],[" "],[" "],[" "],[ 1 ],[" "],[" "],[" "]],
+            [[" "],[" "],[" "],[ 4 ],[" "],[" "],[" "],[ 6 ],[" "]],
+            [[ 6 ],[" "],[" "],[" "],[ 5 ],[" "],[" "],[" "],[ 6 ]],
+            [[" "],[ 1 ],[" "],[" "],[" "],[ 7 ],[" "],[" "],[" "]],
+            [[" "],[" "],[" "],[ 5 ],[" "],[" "],[" "],[ 2 ],[" "]],
+            [[" "],[" "],[ 8 ],[" "],[" "],[" "],[ 1 ],[" "],[" "]],
+            [[ 3 ],[" "],[" "],[" "],[ 6 ],[" "],[" "],[" "],[" "]]]
 
 # TESTS
 
 print("Input:")
-print_sodoku.print_sodoku(sodoku19)
-sodoku_list.make_list(sodoku19)
-solve_sodoku(sodoku19)
+print_sodoku.print_sodoku(sodoku20)
+sodoku_list.make_list(sodoku20)
+solve_sodoku(sodoku20)
 print("Output:")
-print_sodoku.print_sodoku(sodoku19)
-
+print_sodoku.print_sodoku(sodoku20)
