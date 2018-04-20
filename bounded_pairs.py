@@ -19,7 +19,7 @@ def compare_pair(list):
             if list[n][1] == list[k][1] and list[n][2] == list[k][2]:
                 pair.append([n,k])
     return pair
-    
+
 def bounded_pair(pair_koord):
     # Tar fram bundna par ur pair_koord och ordnar deras koordinater
     # och returnerar dom i par.
@@ -35,16 +35,16 @@ def remove_pair_box(sodoku, a, i, j, b, I, J):
         for l in range(j - j % 3, j - j % 3 + 3):
             if (k != i or l != j) and sodoku[k][l].count(a) != 0:
                 # or för att vi redan sökt k = i, l = j ovan.
-                if k != I and l != J:
+                if k != I or l != J:
                     print("Exicuting: sodoku[", k, "][", l, "].remove(", a, ") box")
                     sodoku[k][l].remove(a)
-                
+
             if (k != i or l != j) and sodoku[k][l].count(b) != 0:
                 # or för att vi redan sökt k = i, l = j ovan.
-                if k != I and l != J:
+                if k != I or l != J:
                     print("Exicuting: sodoku[", k, "][", l, "].remove(", b, ") box")
                     sodoku[k][l].remove(b)
-                    
+
     return
 
 
@@ -67,4 +67,3 @@ def remove_pair_kol(sodoku, a, i, j, b, I, J):
             print("Exicuting: sodoku[", k, "][", j, "].remove(", b, ")")
             sodoku[k][j].remove(b)
     return
-   
