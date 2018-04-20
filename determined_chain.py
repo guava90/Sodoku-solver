@@ -92,7 +92,7 @@ def semi_determined_rectangle(sodoku):
                 == sodoku[i1][j].count(b) == sodoku[i2][j].count(b) == 1 and
                 len(sodoku[i1][j]) == len(sodoku[i2][j]) == 4 and
                 sodoku[i1][j][3] == sodoku[i2][j][3]):
-                    c = sodoku[i][j1][3]
+                    c = sodoku[i1][j][3]
                     print("Found semi determined rectangle.")
                     bounded_pairs.remove_pair_kol(sodoku, c, i1, j, 0, i2, j)
 
