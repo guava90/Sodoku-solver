@@ -4,7 +4,7 @@ import sodoku_list
 import print_sodoku
 
 def find_start(sodoku, a):
-    # Söker efter startpositionen för enkel färglägning    
+    # Söker efter startpositionen för enkel färglägning
 ##    a = search_sodoku.ninki(sodoku)
     for i in range(9):
         for j in range(9):
@@ -12,15 +12,16 @@ def find_start(sodoku, a):
             statement2 = search_sodoku.search_row_hidden(sodoku, i, a) == 2
             statement3 = search_sodoku.search_kol_hidden(sodoku, j, a) == 2
             statement4 = search_sodoku.search_box_hidden(sodoku, i, j, a) == 2
-            if statement1 and statement2 and statement3 and statement4:
+            statement5 = sodoku[i][j].count(a) == 1
+            if statement1 and statement2 and statement3 and statement4 and statement5:
                 start = (i, j)
                 sodoku[i][j].insert(0, "X")
                 print("Start coloring kandidate", a, "with X at", i, j)
                 return start #, a
-    return () 
+    return ()
 #def find_next(sodoku, i0, j0, i1, j1, i2, j2, a):
-    
-    
+
+
 
 def color_row(sodoku, n, i, j, a):
     end = True
@@ -36,7 +37,7 @@ def color_row(sodoku, n, i, j, a):
             j = k
             end = False
     return j, n, end
-    
+
 def color_kol(sodoku, n, i, j, a):
     end = True
     for k in range(9):
@@ -95,7 +96,7 @@ def buddies(i1, j1, i2, j2):
         return koord
 
 
-    
+
 def simple_coloring(sodoku, a):
     # Får kolla av rad/kol och sen box. Skulle ena ge återvändsgränd gå efter
     # den andra. Ger båda återvändsgränd terminerar vi.
@@ -107,10 +108,10 @@ def simple_coloring(sodoku, a):
 ##    else:
 ##        print("Found", a)
     start = find_start(sodoku, a)
-    
+
     if len(start) == 0:
         return
-    
+
     i0 = start[0]
     j0 = start[1]
 
@@ -122,17 +123,17 @@ def simple_coloring(sodoku, a):
     # uppdatera där.
     statement1 = search_sodoku.search_row_hidden(sodoku, i1, a) == 2
     statement2 = search_sodoku.search_box_hidden(sodoku, i1, j0, a) == 2
-    
+
     # Om 3 och 4 stämmer kan vi gå längs rad i0 till kolumn j1 och
     # uppdatera där.
     statement3 = search_sodoku.search_kol_hidden(sodoku, j1, a) == 2
     statement4 = search_sodoku.search_box_hidden(sodoku, i0, j1, a) == 2
-    
+
     # Om 5 stämer och 6 inte stämmer går vi till (i2,j2) och uppdaterar
     # raden. Eller tvärt om.
     statement5 = search_sodoku.search_row_hidden(sodoku, i2, a) == 2
     statement6 = search_sodoku.search_kol_hidden(sodoku, j2, a) == 2
-    
+
     end = end1 and end2 and end3
     while not end:
         # Om 1 och 2 stämmer kan vi gå längs kolumn j0 till rad i1 och
@@ -142,15 +143,15 @@ def simple_coloring(sodoku, a):
             i0 = i1
             j1, m, end1 = color_row(sodoku, n, i0, j0, a)
             i2, j2, n, end2 = color_box(sodoku, n, i0, j0, a)
-            
+
             end = end1 and end2
-            
+
             statement1 = False
             statement2 = False
-        
+
             statement3 = search_sodoku.search_kol_hidden(sodoku, j1, a) == 2
             statement4 = search_sodoku.search_box_hidden(sodoku, i0, j1, a) == 2
-        
+
             statement5 = search_sodoku.search_row_hidden(sodoku, i2, a) == 2
             statement6 = search_sodoku.search_kol_hidden(sodoku, j2, a) == 2
         # Om 3 och 4 stämmer kan vi gå längs rad i0 till kolumn j1 och
@@ -160,15 +161,15 @@ def simple_coloring(sodoku, a):
             j0 = j1
             i1, m, end1 = color_kol(sodoku, n, i0, j0, a)
             i2, j2, n, end2 = color_box(sodoku, n, i0, j0, a)
-            
+
             end = end1 and end2
-            
+
             statement1 = search_sodoku.search_row_hidden(sodoku, i1, a) == 2
             statement2 = search_sodoku.search_box_hidden(sodoku, i1, j0, a) == 2
-        
+
             statement3 = False
             statement4 = False
-            
+
             statement5 = search_sodoku.search_row_hidden(sodoku, i2, a) == 2
             statement6 = search_sodoku.search_kol_hidden(sodoku, j2, a) == 2
         # Om 5 stämer och 6 inte stämmer går vi till (i2,j2) och uppdaterar
@@ -178,31 +179,31 @@ def simple_coloring(sodoku, a):
             i0 = i2
             j0 = j2
             j1, n, end = color_row(sodoku, n, i0, j0, a)
-            
+
             statement1 = search_sodoku.search_row_hidden(sodoku, i1, a) == 2
             statement2 = search_sodoku.search_box_hidden(sodoku, i1, j0, a) == 2
-            
+
             statement3 = search_sodoku.search_kol_hidden(sodoku, j1, a) == 2
             statement4 = search_sodoku.search_box_hidden(sodoku, i0, j1, a) == 2
-            
+
             statement5 = False
             statement6 = search_sodoku.search_kol_hidden(sodoku, j2, a) == 2
-            
+
         elif not statement5 and statement6:
             print("Moving to position", i2, j2, "n =", n)
             i0 = i2
             j0 = j2
             i1, n, end = color_kol(sodoku, n, i0, j0, a)
-            
+
             statement1 = search_sodoku.search_row_hidden(sodoku, i1, a) == 2
             statement2 = search_sodoku.search_box_hidden(sodoku, i1, j0, a) == 2
-            
+
             statement3 = search_sodoku.search_kol_hidden(sodoku, j1, a) == 2
             statement4 = search_sodoku.search_box_hidden(sodoku, i0, j1, a) == 2
-            
+
             statement5 = search_sodoku.search_row_hidden(sodoku, i2, a) == 2
             statement6 = False
-            
+
         else:
             end = True
     print("Making a simple coloring:")
@@ -216,7 +217,7 @@ def find_O(sodoku):
             if sodoku[i][j][0] == "O":
                 return i, j
     return 9, 9
-            
+
 def find_X(sodoku, i, j, a):
     for k in range(9):
         for l in range(9):
@@ -230,11 +231,10 @@ def find_X(sodoku, i, j, a):
                         sodoku[i0][j0].remove(a)
     sodoku[i][j].remove("O")
     return
-    
+
 def remove_X(sodoku):
     for i in range(9):
         for j in range(9):
             if sodoku[i][j].count("X") == 1:
                 sodoku[i][j].remove("X")
     return
-
