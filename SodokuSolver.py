@@ -60,6 +60,7 @@ def solve_sodoku(sodoku):
         x_wing.x_wing_kol(sodoku)
         determined_chain.determined_rectangle(sodoku)
         determined_chain.semi_determined_rectangle(sodoku)
+
         for a in range(1,10):
             simple_coloring.simple_coloring(sodoku, a)
     #print(triples)
@@ -70,21 +71,21 @@ def solve_sodoku(sodoku):
 
     return sodoku
 
-sodoku20 = [[[" "],[" "],[" "],[" "],[ 2 ],[" "],[" "],[" "],[ 5 ]],
-            [[" "],[" "],[ 4 ],[" "],[" "],[" "],[ 7 ],[" "],[" "]],
-            [[" "],[ 9 ],[" "],[" "],[" "],[ 1 ],[" "],[" "],[" "]],
-            [[" "],[" "],[" "],[ 4 ],[" "],[" "],[" "],[ 6 ],[" "]],
-            [[ 6 ],[" "],[" "],[" "],[ 5 ],[" "],[" "],[" "],[ 6 ]],
-            [[" "],[ 1 ],[" "],[" "],[" "],[ 7 ],[" "],[" "],[" "]],
-            [[" "],[" "],[" "],[ 5 ],[" "],[" "],[" "],[ 2 ],[" "]],
-            [[" "],[" "],[ 8 ],[" "],[" "],[" "],[ 1 ],[" "],[" "]],
-            [[ 3 ],[" "],[" "],[" "],[ 6 ],[" "],[" "],[" "],[" "]]]
+sodoku21 = [[[ 9 ],[" "],[ 1 ],[" "],[" "],[" "],[" "],[ 6 ],[" "]],
+            [[" "],[" "],[" "],[" "],[" "],[" "],[ 9 ],[" "],[" "]],
+            [[" "],[" "],[" "],[ 3 ],[ 4 ],[" "],[ 2 ],[" "],[ 5 ]],
+            [[" "],[" "],[" "],[" "],[" "],[ 1 ],[" "],[ 5 ],[" "]],
+            [[" "],[" "],[ 6 ],[ 2 ],[" "],[ 5 ],[ 7 ],[" "],[" "]],
+            [[" "],[ 2 ],[" "],[ 8 ],[" "],[" "],[" "],[" "],[" "]],
+            [[ 1 ],[" "],[ 7 ],[" "],[ 5 ],[ 8 ],[" "],[" "],[" "]],
+            [[" "],[" "],[ 4 ],[" "],[" "],[" "],[" "],[" "],[" "]],
+            [[" "],[ 5 ],[" "],[" "],[" "],[" "],[ 8 ],[" "],[ 7 ]]]
 
 # TESTS
 
 print("Input:")
-print_sodoku.print_sodoku(sodoku20)
-sodoku_list.make_list(sodoku20)
-solve_sodoku(sodoku20)
+print_sodoku.print_sodoku(sodoku21)
+sodoku_list.make_list(sodoku21)
+solve_sodoku(sodoku21)
 print("Output:")
-print_sodoku.print_sodoku(sodoku20)
+print_sodoku.print_sodoku(sodoku21)
