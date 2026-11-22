@@ -1,7 +1,7 @@
 # Simple Coloring module
-import search_sodoku
-import sodoku_list
-import print_sodoku
+import python.search_sodoku as search_sodoku
+import python.sodoku_list as sodoku_list
+import python.print_sodoku as print_sodoku
 
 def find_start(sodoku, a):
     # Söker efter startpositionen för enkel färglägning

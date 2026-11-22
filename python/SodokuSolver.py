@@ -4,15 +4,15 @@
 # Ska kanske lägga till en module för vanligare funktioner som
 # write_number() i slice_n_dice.py utifall jag behöver den i
 # kommande moduler också.
-import print_sodoku
-import sodoku_list
-import slice_n_dice
-import bounded_pairs
-import bounded_triples
-import search_sodoku
-import x_wing
-import determined_chain
-import simple_coloring
+import python.print_sodoku as print_sodoku
+import python.sodoku_list as sodoku_list
+import python.slice_n_dice as slice_n_dice
+import python.bounded_pairs as bounded_pairs
+import python.bounded_triples as bounded_triples
+import python.search_sodoku as search_sodoku
+import python.x_wing as x_wing
+import python.determined_chain as determined_chain
+import python.simple_coloring as simple_coloring
 
 
 def solve_sodoku(sodoku):

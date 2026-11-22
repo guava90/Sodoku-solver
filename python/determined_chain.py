@@ -1,6 +1,6 @@
 # determined chain module
 
-import bounded_pairs
+import python.bounded_pairs as bounded_pairs
 
 def determined_rectangle(sodoku):
     # Funktionen letar efter rektanglar med samma kandidater i alla hörn.

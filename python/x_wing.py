@@ -1,6 +1,6 @@
 # X wing module
-import search_sodoku
-import bounded_pairs
+import python.search_sodoku as search_sodoku
+import python.bounded_pairs as bounded_pairs
 
 def x_search_row(sodoku, a, m = 2):
     # Söker igenom sodoku efter a och om a förekommer två gånger i två rader
